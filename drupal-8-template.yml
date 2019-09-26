@@ -3,7 +3,7 @@ apiVersion: v1
 message: |-
   The following service(s) have been created in your project: Drupal 8, MariaDB.
 metadata:
-  name: drupal-8
+  name: drupal
   annotations:
     description: Drupal 8, MariaDB, PHP 7.2
     repo: https://github.com/badri/drupal-8-composer.git
@@ -283,8 +283,12 @@ objects:
   kind: Route
   metadata:
     name: ${NAME}
+    annotations:
+      kubernetes.io/tls-acme: 'true'
   spec:
     host: ${APPLICATION_DOMAIN}
+    tls:
+      termination: edge
     to:
       kind: Service
       name: ${NAME}
