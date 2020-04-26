@@ -1,19 +1,19 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 LABEL maintainer="Lakshmi Narasimhan <lakshmi@shapeblock.com>"
 
 LABEL io.k8s.description="Base image for Drupal 8" \
       io.k8s.display-name="OpenShift Drupal 8" \
       io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
-      io.openshift.tags="builder, php-fpm, php-7.2, Drupal 8"
+      io.openshift.tags="builder, php-fpm, php-7.3, Drupal 8"
 
 RUN apt-get update \
-    && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev wget git curl python unzip mysql-client
+    && apt-get install --no-install-recommends -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libzip-dev wget git curl python unzip
 
 RUN  docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
      && docker-php-ext-install gd \
      && :\
-     && docker-php-ext-install pdo pdo_mysql opcache zip \
+     && docker-php-ext-install pdo pdo_mysql opcache zip bcmath \
      && docker-php-ext-enable pdo pdo_mysql opcache zip
 
 COPY ./s2i/bin/ /usr/libexec/s2i
