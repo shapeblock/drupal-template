@@ -5,7 +5,7 @@ message: |-
 metadata:
   name: drupal
   annotations:
-    description: Drupal 8, MariaDB, PHP 7.2
+    description: Drupal 8, MariaDB, PHP 7.3
     repo: https://github.com/badri/drupal-8-composer.git
     icon: drupal
     iconClass: icon-drupal
@@ -282,7 +282,7 @@ objects:
         sourceStrategy:
           from:
             kind: ImageStreamTag
-            name: drupal-8:7.2
+            name: drupal-8:7.3
             namespace: openshift
           incremental: true
         type: Source

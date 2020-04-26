@@ -1,6 +1,6 @@
 This repo contains the following artifacts required to run Drupal apps on OpenShift.
 
-1. PHP FPM image running PHP 7.2
+1. PHP FPM image running PHP 7.3
 2. Nginx image
 3. Drupal template
 
@@ -11,15 +11,15 @@ This repo contains the following artifacts required to run Drupal apps on OpenSh
 ```
 $ cd s2i-build
 
-$ docker build -t shapeblock/drupal-8:7.2 .
+$ docker build -t shapeblock/drupal-8:7.3 .
 
-$ docker push shapeblock/drupal-8:7.2
+$ docker push shapeblock/drupal-8:7.3
 
-$ oc import-image shapeblock/drupal-8:7.2 --confirm
+$ oc import-image shapeblock/drupal-8:7.3 --confirm
 
 # or if creating a new tag
 
-$ oc  tag --source=docker shapeblock/drupal-8:7.2 shapeblock/drupal-8:7.2 
+$ oc  tag --source=docker shapeblock/drupal-8:7.3 shapeblock/drupal-8:7.3
 
 ```
 
