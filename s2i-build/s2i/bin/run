@@ -1,4 +1,19 @@
 #!/bin/bash
 
+
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+envsubst < /tmp/passwd.template > /tmp/passwd
+export LD_PRELOAD=libnss_wrapper.so
+export NSS_WRAPPER_PASSWD=/tmp/passwd
+export NSS_WRAPPER_GROUP=/etc/group
+
+
+echo " ----> generating ssh key."
+exec ssh-keygen -t rsa -f /keys/ssh_host_rsa_key
+
+echo " -----> Starting sshd."
+exec /usr/sbin/sshd -h /keys/ssh_host_rsa_key -D
+
 echo " -----> Run PHP FPM server."
 exec php-fpm
